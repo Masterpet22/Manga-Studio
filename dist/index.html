@@ -13,7 +13,7 @@
     <div class="brand" aria-label="Manga Studio">
       <span class="brand-mark">M</span>
       <span>MANGA <b>STUDIO</b></span>
-      <span class="badge">PROTOTIPO v0.5.0</span>
+      <span class="badge">PROTOTIPO v0.6.0</span>
     </div>
     <div class="history-tools" aria-label="Historial">
       <button class="icon-btn" id="undoBtn" title="Deshacer" aria-label="Deshacer">↶</button>
@@ -22,7 +22,7 @@
     </div>
     <div class="top-actions">
       <button class="button ghost" id="newBtn">＋ Página</button>
-      <button class="button primary" id="exportBtn">Descargar PNG</button>
+      <button class="button primary" id="exportBtn">Exportar</button>
     </div>
   </header>
 
@@ -32,7 +32,8 @@
         <span class="eyebrow">PROYECTO</span>
         <input id="projectName" maxlength="60" aria-label="Nombre del proyecto" value="Mi manga">
         <select id="projectSelect" aria-label="Cambiar de proyecto"></select>
-        <div class="project-actions"><button id="newProject">Nuevo</button><button id="duplicateProject">Duplicar</button><button id="deleteProject">Eliminar</button></div>
+        <div class="project-actions"><button id="newProject">Nuevo</button><button id="duplicateProject">Duplicar</button><button id="importProjectBtn">Importar</button><button id="deleteProject">Eliminar</button></div>
+        <input id="importProjectInput" type="file" accept=".mangastudio" hidden>
       </section>
       <nav class="asset-tabs" aria-label="Recursos">
         <button class="asset-tab active" data-tab="characters">Personajes</button>
@@ -272,6 +273,27 @@
         <div><button class="button ghost" id="resetPose3d">Restablecer</button><button class="button primary" id="applyPose3d">Aplicar a la viñeta</button></div>
       </footer>
     </div>
+  </div>
+
+  <div class="export-modal" id="exportModal" hidden>
+    <section class="export-dialog" role="dialog" aria-modal="true" aria-labelledby="exportTitle">
+      <header class="export-header"><div><span class="eyebrow">SALIDA Y RESPALDO</span><h2 id="exportTitle">Exportar proyecto</h2></div><button class="icon-btn" id="closeExport" aria-label="Cerrar">×</button></header>
+      <div class="export-body">
+        <div class="export-grid">
+          <label>Perfil<select id="exportProfile"><option value="web">Web · 600 × 800</option><option value="a4">A4 · 300 DPI</option><option value="b5">B5 manga · 300 DPI</option><option value="custom">Personalizado</option></select></label>
+          <label>Formato<select id="exportFormat"><option value="png">PNG</option><option value="jpeg">JPEG</option><option value="webp">WebP</option></select></label>
+          <label>Alcance<select id="exportScope"><option value="current">Página actual</option><option value="all">Todas las páginas</option></select></label>
+          <label>Escala<select id="exportScale"><option value="1">1×</option><option value="2">2×</option><option value="3">3×</option></select></label>
+        </div>
+        <div class="custom-size" id="customSize" hidden><label>Ancho px<input id="exportWidth" type="number" min="64" max="12000" value="1200"></label><label>Alto px<input id="exportHeight" type="number" min="64" max="12000" value="1600"></label><label>DPI<input id="exportDpi" type="number" min="72" max="600" value="300"></label></div>
+        <div class="range-row"><span>Calidad JPEG/WebP</span><input id="exportQuality" type="range" min="55" max="100" value="92"><output id="exportQualityOut">92%</output></div>
+        <div class="export-checks"><label><input id="exportBleed" type="checkbox"> Sangrado de 3 mm</label><label><input id="exportMarks" type="checkbox"> Marcas de corte</label></div>
+        <div class="export-summary" id="exportSummary"></div>
+        <div class="export-warnings" id="exportWarnings" role="status"></div>
+        <div class="export-progress" id="exportProgress" hidden><i></i><span>Preparando…</span></div>
+      </div>
+      <footer class="export-footer"><button class="button ghost" id="exportProjectFile">Respaldo .mangastudio</button><div><button class="button ghost" id="exportPdf">PDF multipágina</button><button class="button primary" id="exportImages">Exportar imágenes</button></div></footer>
+    </section>
   </div>
 
   <div class="toast" id="toast" role="status"></div>

@@ -1,7 +1,7 @@
 # Roadmap de Manga Studio hacia 1.0
 
 Última actualización: 7 de septiembre de 2026  
-Estado actual: **Prototipo v0.5.0**
+Estado actual: **Prototipo v0.6.0**
 
 ## Visión de 1.0
 
@@ -139,7 +139,7 @@ Criterio de salida: se puede crear una página original completa usando assets p
 
 Implementado en v0.5.0: esquema documental v3 con migración automática; división y unión de viñetas, canal, borde, inclinación y guía de sangrado; edición directa de texto en el lienzo, familias seguras, alineación, tracking, interlineado y padding; globos de diálogo y pensamiento con cola orientable; tramas de puntos, velocidad e impacto con densidad, escala y ángulo; fondos importados con escala, posición, opacidad, desenfoque y monocromo; biblioteca local buscable y ordenada por uso reciente; validación de tipo/tamaño y filtrado conservador de SVG; importación VRM local con consentimiento, comprobación GLB y recarga del estudio 3D; plantillas de diálogo, acción y 4-koma. La comparación visual CJK/multinavegador y la matriz amplia de VRM siguen como validación transversal antes de beta.
 
-## Fase 4 — Exportación e interoperabilidad (v0.6.0)
+## Fase 4 — Exportación e interoperabilidad (v0.6.0) — completada
 
 **Objetivo:** obtener archivos confiables para web, impresión y respaldo.
 
@@ -156,6 +156,8 @@ Trabajo:
 Pruebas: dimensiones, transparencia, orden y color; round-trip sin pérdida; proyecto de estrés de 40 páginas.
 
 Criterio de salida: los resultados coinciden con el editor y un respaldo abre en otro navegador compatible.
+
+Implementado en v0.6.0: exportación de página actual o lote en PNG/JPEG/WebP, escalas 1×–3× y dimensiones personalizadas; perfiles web, A4 y B5 con DPI real, sangrado de 3 mm y marcas de corte; PDF multipágina con orden y dimensiones físicas; formato `.mangastudio` basado en ZIP con manifiesto, recursos separados y checksums SHA-256; importación con verificación de integridad, límites de tamaño/descompresión, rutas seguras, rechazo de entradas inesperadas, vista previa y migración; avisos de recursos de baja resolución, elementos fuera de página y fuentes ausentes; render fuera de pantalla con fallback de canvas y límites de memoria para lotes. El proyecto de estrés de 40 páginas queda como prueba transversal de rendimiento para la fase 5.
 
 ## Fase 5 — UX, accesibilidad y rendimiento (v0.7.0)
 
@@ -256,4 +258,4 @@ Fuera de 1.0: colaboración simultánea, marketplace, generación automática co
 
 ## Próxima iteración recomendada
 
-Iniciar v0.6.0 por la exportación por lotes y perfiles de tamaño, seguida del formato portable `.mangastudio`, su importación validada y el PDF multipágina. La biblioteca y el esquema v3 ya permiten empaquetar recursos sin perder compatibilidad.
+Iniciar v0.7.0 con una auditoría de accesibilidad y flujos completos por teclado, seguida del rediseño responsive para tablet, estados de carga/error y presupuestos medibles de rendimiento. La exportación portable permitirá conservar fixtures reproducibles para esa matriz.

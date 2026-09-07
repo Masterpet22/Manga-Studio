@@ -1,0 +1,4 @@
+import test from'node:test';import assert from'node:assert/strict';import{mimeForFormat,resolveExportSize,safeFilename}from'../src/export-profiles.js';
+test('resolves web, print and custom export sizes',()=>{assert.deepEqual(resolveExportSize({profile:'web',scale:2}),{width:1200,height:1600,dpi:96});assert.deepEqual(resolveExportSize({profile:'a4'}),{width:2480,height:3508,dpi:300});assert.deepEqual(resolveExportSize({profile:'custom',width:900,height:1200,dpi:144}),{width:900,height:1200,dpi:144})});
+test('rejects unsafe export dimensions',()=>assert.throws(()=>resolveExportSize({profile:'custom',width:12000,height:12000}),/80 megapíxeles/));
+test('normalizes filenames and image MIME types',()=>{assert.equal(safeFilename('Capítulo 01: Señal'),'capitulo-01-senal');assert.equal(mimeForFormat('webp'),'image/webp')});

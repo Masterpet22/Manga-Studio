@@ -2,7 +2,7 @@
 
 Prototipo web de un editor de manga con composición 2D y estudio de poses 3D.
 
-**Estado actual: Prototipo v0.5.0.** El editor ya permite construir páginas con recursos propios, herramientas manga configurables y avatares VRM importados; el camino hasta la versión 1.0 está definido en [ROADMAP.md](ROADMAP.md).
+**Estado actual: Prototipo v0.6.0.** El editor ya permite construir, respaldar y exportar proyectos multipágina para web o impresión; el camino hasta la versión 1.0 está definido en [ROADMAP.md](ROADMAP.md).
 
 ## Funciones principales
 
@@ -11,6 +11,9 @@ Prototipo web de un editor de manga con composición 2D y estudio de poses 3D.
 - Texto editable directamente sobre el lienzo, tipografía, alineación, tracking, interlineado y colas de globo.
 - Biblioteca local con búsqueda e importación validada de PNG, JPEG, WebP y SVG seguro.
 - Importación local de avatares VRM con consentimiento, validación de tamaño y sustitución del modelo de muestra.
+- Exportación PNG, JPEG y WebP por página o lote, con perfiles web/A4/B5, escala, DPI, sangrado y marcas.
+- PDF multipágina y respaldo portable `.mangastudio` con recursos, manifiesto y checksums SHA-256.
+- Importación validada con vista previa, límites contra ZIP bombs y rechazo de contenido inesperado.
 - Proyectos multipágina con IndexedDB, autosave, miniaturas y migración desde v0.3.
 - Capas visibles/bloqueables, grupos, orden, selección múltiple, guías y alineación.
 - Exportación de páginas a PNG.
@@ -61,4 +64,4 @@ Consulta `dist/THIRD_PARTY_NOTICES.txt` y `dist/models/NOTICE.txt`.
 
 ## Estado del producto
 
-La versión 0.5.0 completa las herramientas creativas y la biblioteca local: recursos propios, fondos ajustables, texto directo, globos, tramas, plantillas e importación VRM. Todavía es un prototipo: la sincronización es local al dispositivo, la exportación se limita a una página PNG y falta validar visualmente una matriz amplia de avatares y navegadores.
+La versión 0.6.0 completa la salida e interoperabilidad: exporta imágenes y PDF multipágina, incorpora perfiles de impresión y permite mover un proyecto íntegro entre navegadores mediante `.mangastudio`. Todavía es un prototipo: la sincronización es local al dispositivo y faltan las rondas amplias de accesibilidad, rendimiento y compatibilidad multinavegador.

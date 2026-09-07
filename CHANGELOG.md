@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.6.0 — 2026-09-07
+
+- Exportación de una página o lote en PNG, JPEG y WebP a 1×, 2×, 3× o tamaño personalizado.
+- Perfiles web, A4 y B5 manga con metadatos DPI, sangrado de 3 mm y marcas de corte.
+- PDF multipágina con orden, tamaño físico y metadatos del proyecto.
+- Respaldo `.mangastudio` con manifiesto, assets separados y checksums SHA-256.
+- Importación portable validada con vista previa, migración y creación no destructiva de un proyecto nuevo.
+- Defensas contra rutas ZIP inseguras, duplicados, contenido no declarado, archivos enormes y expansión excesiva.
+- Advertencias de resolución, fuentes ausentes y elementos fuera de página.
+- Render fuera de pantalla con fallback y presupuesto máximo por lote.
+- Veintitrés pruebas automatizadas y smoke tests reales de PNG, PDF, respaldo y round-trip.
+
 ## 0.5.0 — 2026-09-07
 
 - Esquema documental v3 con migración automática y ajustes persistentes de viñeta, trama y fondo.
