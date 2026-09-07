@@ -2,12 +2,13 @@
 
 Prototipo web de un editor de manga con composición 2D y estudio de poses 3D.
 
-**Estado actual: Prototipo v0.7.0.** El editor ya permite construir, respaldar y exportar proyectos multipágina desde una interfaz adaptable, accesible por teclado y configurable; el camino hasta la versión 1.0 está definido en [ROADMAP.md](ROADMAP.md).
+**Estado actual: Prototipo v0.7.5.** El editor ya permite construir, respaldar y exportar proyectos multipágina desde una interfaz adaptable, accesible por teclado y configurable; el camino hasta la versión 1.0 está definido en [ROADMAP.md](ROADMAP.md).
 
 ## Funciones principales
 
 - Editor de viñetas, fondos, personajes, globos y efectos.
-- Viñetas ajustables, plantillas, sangrado, tramas configurables y fondos transformables.
+- Viñetas seleccionables e independientes, con fondo, efecto y ajustes visuales propios.
+- Personajes y globos con recorte configurable para permanecer dentro de la viñeta o atravesar sus bordes.
 - Texto editable directamente sobre el lienzo, tipografía, alineación, tracking, interlineado y colas de globo.
 - Biblioteca local con búsqueda e importación validada de PNG, JPEG, WebP y SVG seguro.
 - Importación local de avatares VRM con consentimiento, validación de tamaño y sustitución del modelo de muestra.
@@ -25,7 +26,7 @@ Prototipo web de un editor de manga con composición 2D y estudio de poses 3D.
 - Polos editables de codos/rodillas, bloqueo de pies, espejo y copia lateral.
 - Controles de cadera, columna, pecho y cabeza; modo esqueleto y calidad adaptativa.
 - Materiales MToon, contorno manga y variaciones de vestuario.
-- Cámara orbital con vistas frontal, tres cuartos y perfil.
+- Cámara orbital con vistas frontal, tres cuartos y perfil, más giro del avatar sobre su propio eje.
 
 ## Ejecutar localmente
 
@@ -67,4 +68,4 @@ Consulta `dist/THIRD_PARTY_NOTICES.txt` y `dist/models/NOTICE.txt`.
 
 ## Estado del producto
 
-La versión 0.7.0 completa la primera gran revisión de experiencia, accesibilidad y rendimiento. La carga inicial ya no descarga el estudio 3D ni el avatar de 9,5 MB, y los flujos principales disponen de navegación adaptable y soporte de teclado. Todavía es un prototipo: la sincronización es local al dispositivo y la validación manual con lectores de pantalla, Safari y hardware físico continúa antes de la beta.
+La versión 0.7.5 estabiliza la edición por viñeta: cada panel conserva su fondo y efecto, puede seleccionarse directamente y permite decidir el recorte de cada personaje o globo. También incorpora el giro propio del avatar 3D y sustituye los selectores inestables de preferencias. Todavía es un prototipo: la sincronización es local al dispositivo y la validación manual con lectores de pantalla, Safari y hardware físico continúa antes de la beta.

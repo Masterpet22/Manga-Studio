@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.7.5 — 2026-09-07
+
+- Selección directa de viñetas en el lienzo, con indicador visual y controles sincronizados.
+- Fondo, efecto, opacidad, desenfoque, monocromo y transformación independientes por viñeta.
+- Recorte configurable por personaje, imagen o globo para permitir composiciones que atraviesen bordes.
+- Giro del avatar 3D sobre su propio eje sin alterar la cámara ni invertir sus extremidades.
+- Preferencias rediseñadas como controles segmentados estables y accesibles.
+- Migración automática del esquema documental v3 a v4 sin perder la configuración visual previa.
+- Treinta y tres pruebas automatizadas y verificación funcional en navegador.
+
 ## 0.7.0 — 2026-09-07
 
 - Interfaz adaptable con paneles plegables en escritorio y navegación inferior en tablet/móvil.

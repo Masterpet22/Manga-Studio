@@ -14,7 +14,7 @@
     <div class="brand" aria-label="Manga Studio">
       <span class="brand-mark">M</span>
       <span>MANGA <b>STUDIO</b></span>
-      <span class="badge">PROTOTIPO v0.7.0</span>
+        <span class="badge">PROTOTIPO v0.7.5</span>
     </div>
     <div class="history-tools" aria-label="Historial">
       <button class="icon-btn" id="undoBtn" title="Deshacer" aria-label="Deshacer">↶</button>
@@ -153,6 +153,7 @@
         <div class="range-row"><label for="scaleRange">Tamaño</label><input id="scaleRange" type="range" min="30" max="180" value="100" /></div>
         <div class="range-row"><label for="rotateRange">Rotación</label><input id="rotateRange" type="range" min="-30" max="30" value="0" /></div>
         <button class="button full" id="flipBtn">Voltear horizontal</button>
+        <label class="check-row clip-control"><span>Recortar al borde de la viñeta</span><input id="clipToPanel" type="checkbox" checked></label>
         <div class="align-tools"><button id="alignHorizontal" title="Alinear centros horizontalmente">↔ Alinear</button><button id="alignVertical" title="Alinear centros verticalmente">↕ Alinear</button></div>
       </div>
 
@@ -174,15 +175,15 @@
         <div class="range-row"><label for="panelBorder">Borde</label><input id="panelBorder" type="range" min="2" max="14" value="6"></div>
         <div class="range-row"><label for="panelSlant">Ángulo</label><input id="panelSlant" type="range" min="-30" max="30" value="0"></div>
         <label class="check-row"><span>Sangrado de página</span><input id="pageBleed" type="checkbox"></label>
-        <label for="backgroundSelect">Fondo de escena</label>
+        <div class="panel-edit-heading"><span>VIÑETA ACTIVA</span><b id="selectedPanelName">Viñeta 1</b><small>Haz clic en una viñeta del lienzo para editarla.</small></div>
+        <label for="backgroundSelect">Fondo de la viñeta</label>
         <select id="backgroundSelect">
           <option value="city">Ciudad nocturna</option>
-          <option value="speed">Líneas de velocidad</option>
-          <option value="dots">Trama de puntos</option>
-          <option value="burst">Impacto radial</option>
           <option value="blank">Blanco limpio</option>
           <option value="imported">Fondo importado</option>
         </select>
+        <label for="panelEffectSelect">Efecto de la viñeta</label>
+        <select id="panelEffectSelect"><option value="none">Sin efecto</option><option value="speed">Líneas de velocidad</option><option value="dots">Trama de puntos</option><option value="burst">Impacto radial</option></select>
         <div class="range-row"><label for="backgroundOpacity">Opacidad</label><input id="backgroundOpacity" type="range" min="20" max="100" value="100"></div>
         <div class="range-row"><label for="backgroundBlur">Desenfoque</label><input id="backgroundBlur" type="range" min="0" max="12" value="0"></div>
         <div class="range-row"><label for="backgroundScale">Escala</label><input id="backgroundScale" type="range" min="50" max="220" value="100"></div>
@@ -258,6 +259,8 @@
           </div>
           <div class="pose-section">
             <label>Centro del cuerpo</label>
+            <div class="joint-row model-turn"><label for="modelYaw">Giro propio</label><input id="modelYaw" type="range" min="-180" max="180" value="0"></div>
+            <p class="pose-help">Gira al personaje sobre su propio eje sin mover la cámara.</p>
             <div class="joint-row"><label for="bodyHips">Cadera</label><input data-pose-adjust id="bodyHips" type="range" min="-60" max="60" value="0"></div>
             <div class="joint-row"><label for="bodySpine">Columna</label><input data-pose-adjust id="bodySpine" type="range" min="-60" max="60" value="0"></div>
             <div class="joint-row"><label for="bodyChest">Pecho</label><input data-pose-adjust id="bodyChest" type="range" min="-60" max="60" value="0"></div>
@@ -322,12 +325,12 @@
     <section class="utility-dialog" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" tabindex="-1">
       <header><div><span class="eyebrow">PREFERENCIAS</span><h2 id="settingsTitle">Espacio de trabajo</h2></div><button class="icon-btn" data-close-modal="settingsModal" aria-label="Cerrar preferencias">×</button></header>
       <div class="utility-body settings-grid">
-        <label>Tema<select id="themePreference"><option value="dark">Oscuro</option><option value="light">Claro</option><option value="system">Usar sistema</option></select></label>
-        <label>Densidad<select id="densityPreference"><option value="comfortable">Cómoda</option><option value="compact">Compacta</option></select></label>
-        <label>Movimiento<select id="motionPreference"><option value="system">Usar sistema</option><option value="reduced">Reducido</option><option value="full">Completo</option></select></label>
-        <label>Calidad 3D<select id="qualityPreference"><option value="auto">Automática</option><option value="efficient">Eficiente</option><option value="high">Alta</option></select></label>
-        <label>Unidades<select id="unitsPreference"><option value="px">Píxeles</option><option value="mm">Milímetros</option></select></label>
-        <label>Autoguardado<select id="autosavePreference"><option value="350">Rápido · 0,35 s</option><option value="1000">Normal · 1 s</option><option value="3000">Relajado · 3 s</option></select></label>
+        <fieldset><legend>Tema</legend><div class="preference-options" data-preference="theme"><button data-value="dark">Oscuro</button><button data-value="light">Claro</button><button data-value="system">Sistema</button></div></fieldset>
+        <fieldset><legend>Densidad</legend><div class="preference-options" data-preference="density"><button data-value="comfortable">Cómoda</button><button data-value="compact">Compacta</button></div></fieldset>
+        <fieldset><legend>Movimiento</legend><div class="preference-options" data-preference="motion"><button data-value="system">Sistema</button><button data-value="reduced">Reducido</button><button data-value="full">Completo</button></div></fieldset>
+        <fieldset><legend>Calidad 3D</legend><div class="preference-options" data-preference="quality"><button data-value="auto">Auto</button><button data-value="efficient">Eficiente</button><button data-value="high">Alta</button></div></fieldset>
+        <fieldset><legend>Unidades</legend><div class="preference-options" data-preference="units"><button data-value="px">Píxeles</button><button data-value="mm">Milímetros</button></div></fieldset>
+        <fieldset><legend>Autoguardado</legend><div class="preference-options" data-preference="autosaveDelay"><button data-value="350">0,35 s</button><button data-value="1000">1 s</button><button data-value="3000">3 s</button></div></fieldset>
       </div>
       <footer><button class="button ghost" id="resetPreferences">Restablecer</button><button class="button primary" data-close-modal="settingsModal">Guardar</button></footer>
     </section>

@@ -1,7 +1,7 @@
 # Roadmap de Manga Studio hacia 1.0
 
 Última actualización: 7 de septiembre de 2026  
-Estado actual: **Prototipo v0.7.0**
+Estado actual: **Prototipo v0.7.5**
 
 ## Visión de 1.0
 
@@ -180,6 +180,10 @@ Criterio de salida: todos los flujos esenciales funcionan con teclado y tacto de
 
 Implementado en v0.7.0: paneles plegables en escritorio y navegación inferior por áreas en tablet/móvil; preferencias persistentes de tema, densidad, movimiento, calidad 3D, unidades, autoguardado y espacio de trabajo; onboarding y guía de atajos; enlace para saltar al editor, foco visible, nombres asociados a controles, regiones de estado y manipulación por teclado; tamaño táctil reforzado y soporte de movimiento reducido; estados vacíos y rendimiento visible; selector y virtualización del riel para proyectos extensos; miniaturas con carga diferida; personaje 2D reducido de 1,7 MB a 314 KB; estudio 3D de 755 KB y avatar VRM de 9,5 MB fuera de la ruta inicial. La suite sube a 29 pruebas y el smoke audit comprueba nombres, desbordamiento y recursos en 390 × 844 y 1440 × 1000. La validación manual con lectores de pantalla, Safari y hardware físico permanece como control transversal antes de la beta, por lo que esta entrega no se presenta como certificación formal WCAG.
 
+## Corrección de estabilización — v0.7.5 — completada
+
+Antes de iniciar la fase 6 se corrigió el modelo de interacción de las viñetas. Cada panel se selecciona directamente y conserva de forma independiente fondo, efecto, opacidad, desenfoque, monocromo y transformación. Cada personaje, imagen o globo decide si se recorta al borde o puede atravesarlo. El avatar 3D dispone de giro propio sobre el eje vertical, manteniendo objetivos IK y lados anatómicos coherentes. Los selectores de preferencias se sustituyeron por controles segmentados para evitar menús que desaparecían en el navegador integrado. El esquema documental v4 migra automáticamente los proyectos anteriores y la suite alcanza 33 pruebas.
+
 ## Fase 6 — Privacidad y confiabilidad (v0.8.0)
 
 **Objetivo:** preparar la operación real sin comprometer las obras.
@@ -260,4 +264,4 @@ Fuera de 1.0: colaboración simultánea, marketplace, generación automática co
 
 ## Próxima iteración recomendada
 
-Iniciar v0.7.0 con una auditoría de accesibilidad y flujos completos por teclado, seguida del rediseño responsive para tablet, estados de carga/error y presupuestos medibles de rendimiento. La exportación portable permitirá conservar fixtures reproducibles para esa matriz.
+Iniciar la fase 6 (v0.8.0) con una revisión de amenazas, política local-first, recuperación frente a almacenamiento lleno y endurecimiento de la importación. Mantener como matriz de regresión los flujos de viñetas independientes, recorte opcional y giro del avatar incorporados en v0.7.5.

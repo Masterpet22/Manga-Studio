@@ -26,3 +26,11 @@ test('offers responsive workspace navigation and persistent preferences',()=>{
   assert.match(editor,/PREFERENCES_KEY/);
   assert.match(editor,/data-workspace-view/);
 });
+
+test('exposes stable preferences and the v0.7.5 panel controls',()=>{
+  assert.match(html,/class="preference-options" data-preference="density"/);
+  assert.doesNotMatch(html,/id="densityPreference"/);
+  assert.match(html,/id="panelEffectSelect"/);
+  assert.match(html,/id="clipToPanel"/);
+  assert.match(html,/id="modelYaw"/);
+});
