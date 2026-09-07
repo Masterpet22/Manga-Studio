@@ -26,6 +26,10 @@ npx serve dist
 Abre la dirección que muestre `serve`. No abras `dist/index.html` directamente,
 porque el navegador debe cargar el archivo VRM desde un servidor local.
 
+## Publicación
+
+Cada cambio enviado a la rama `main` compila y publica automáticamente el contenido de `dist/` mediante GitHub Pages.
+
 ## Estructura
 
 - `dist/`: aplicación lista para publicar.

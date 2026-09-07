@@ -50,7 +50,7 @@ Entregables:
 - Objetivos IK posicionados según el lado real del esqueleto, no según un signo fijo de pantalla.
 - Solver analítico de dos huesos con alcance limitado y polos de flexión para codos/rodillas.
 - Presets con transformaciones diferenciadas de cadera, columna, pecho y cabeza.
-- Build reproducible del módulo 3D y publicación privada inicial.
+- Build reproducible del módulo 3D y publicación continua en GitHub Pages.
 - Este roadmap y diagnóstico incluidos en el repositorio.
 
 Criterios de salida:
