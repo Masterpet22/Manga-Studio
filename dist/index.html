@@ -13,7 +13,7 @@
     <div class="brand" aria-label="Manga Studio">
       <span class="brand-mark">M</span>
       <span>MANGA <b>STUDIO</b></span>
-      <span class="badge">PROTOTIPO v0.2.0</span>
+      <span class="badge">PROTOTIPO v0.3.0</span>
     </div>
     <div class="history-tools" aria-label="Historial">
       <button class="icon-btn" id="undoBtn" title="Deshacer" aria-label="Deshacer">↶</button>
@@ -148,7 +148,7 @@
     <div class="pose-dialog" role="dialog" aria-modal="true" aria-labelledby="poseTitle">
       <header class="pose-header">
         <div><span class="eyebrow">ESTUDIO 3D</span><h2 id="poseTitle">Posar a Akira</h2></div>
-        <div class="pose-head-actions"><span class="live-chip"><i></i> VRM + IK 2-BONE</span><button class="icon-btn" id="closePose3d" aria-label="Cerrar">×</button></div>
+        <div class="pose-head-actions"><span class="live-chip" id="rigState"><i></i> VRM + IK 2-BONE</span><button class="icon-btn" id="closePose3d" aria-label="Cerrar">×</button></div>
       </header>
       <div class="pose-body">
         <section class="viewport3d" id="viewport3d">
@@ -168,16 +168,40 @@
               <button data-preset="run">Corriendo</button>
               <button data-preset="guard">Defensa</button>
               <button data-preset="wave">Saludo</button>
+              <button data-preset="walk">Caminando</button>
+              <button data-preset="jump">Salto</button>
+              <button data-preset="fall">Caída</button>
+              <button data-preset="sit">Sentada</button>
+              <button data-preset="crouch">Agachada</button>
+              <button data-preset="talk">Conversación</button>
             </div>
+            <div class="pose-actions"><button id="mirrorPose">↔ Espejar</button><button id="copyPoseSide">Izq. → der.</button></div>
           </div>
           <div class="pose-section">
             <label>Objetivos IK</label>
-            <p class="pose-help">Mueve los cuatro nodos luminosos directamente sobre el personaje.</p>
+            <p class="pose-help" id="jointFocus">Mueve los cuatro nodos luminosos. Los límites protegen codos y rodillas.</p>
             <div class="ik-key"><span><i class="hand-key"></i>Manos</span><span><i class="foot-key"></i>Pies</span></div>
-            <div class="joint-row"><span>Mano izq.</span><input id="ikLeftHandY" type="range" min="-80" max="80" value="0"></div>
-            <div class="joint-row"><span>Mano der.</span><input id="ikRightHandY" type="range" min="-80" max="80" value="0"></div>
-            <div class="joint-row"><span>Pie izq.</span><input id="ikLeftFootZ" type="range" min="-80" max="80" value="0"></div>
-            <div class="joint-row"><span>Pie der.</span><input id="ikRightFootZ" type="range" min="-80" max="80" value="0"></div>
+            <div class="joint-row"><span>Mano izq.</span><input data-pose-adjust id="ikLeftHandY" type="range" min="-80" max="80" value="0"></div>
+            <div class="joint-row"><span>Mano der.</span><input data-pose-adjust id="ikRightHandY" type="range" min="-80" max="80" value="0"></div>
+            <div class="joint-row"><span>Pie izq.</span><input data-pose-adjust id="ikLeftFootZ" type="range" min="-80" max="80" value="0"></div>
+            <div class="joint-row"><span>Pie der.</span><input data-pose-adjust id="ikRightFootZ" type="range" min="-80" max="80" value="0"></div>
+            <div class="lock-row"><label><input id="lockLeftFoot" type="checkbox"> Fijar pie izq.</label><label><input id="lockRightFoot" type="checkbox"> Fijar pie der.</label></div>
+          </div>
+          <div class="pose-section">
+            <label>Dirección de flexión</label>
+            <p class="pose-help">Corrige el plano de cada codo o rodilla sin invertir la extremidad.</p>
+            <div class="joint-row"><span>Codo izq.</span><input data-pose-adjust id="poleLeftElbow" type="range" min="-100" max="100" value="0"></div>
+            <div class="joint-row"><span>Codo der.</span><input data-pose-adjust id="poleRightElbow" type="range" min="-100" max="100" value="0"></div>
+            <div class="joint-row"><span>Rodilla izq.</span><input data-pose-adjust id="poleLeftKnee" type="range" min="-100" max="100" value="0"></div>
+            <div class="joint-row"><span>Rodilla der.</span><input data-pose-adjust id="poleRightKnee" type="range" min="-100" max="100" value="0"></div>
+            <div class="pose-actions"><button id="resetArms">Restablecer brazos</button><button id="resetLegs">Restablecer piernas</button></div>
+          </div>
+          <div class="pose-section">
+            <label>Centro del cuerpo</label>
+            <div class="joint-row"><span>Cadera</span><input data-pose-adjust id="bodyHips" type="range" min="-60" max="60" value="0"></div>
+            <div class="joint-row"><span>Columna</span><input data-pose-adjust id="bodySpine" type="range" min="-60" max="60" value="0"></div>
+            <div class="joint-row"><span>Pecho</span><input data-pose-adjust id="bodyChest" type="range" min="-60" max="60" value="0"></div>
+            <div class="joint-row"><span>Cabeza</span><input data-pose-adjust id="bodyHead" type="range" min="-60" max="60" value="0"></div>
           </div>
           <div class="pose-section">
             <label>Ropa</label>
@@ -193,6 +217,8 @@
               <button data-camera="front">Frente</button><button data-camera="threequarter">¾</button><button data-camera="profile">Perfil</button>
             </div>
             <label class="toggle-row"><span>Contorno manga</span><input id="outlineToggle" type="checkbox" checked></label>
+            <label class="toggle-row"><span>Mostrar esqueleto</span><input id="skeletonToggle" type="checkbox"></label>
+            <span class="quality-state" id="qualityState">Detectando calidad…</span>
           </div>
         </aside>
       </div>

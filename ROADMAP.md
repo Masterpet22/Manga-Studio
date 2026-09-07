@@ -1,7 +1,7 @@
 # Roadmap de Manga Studio hacia 1.0
 
 Última actualización: 7 de septiembre de 2026  
-Estado de partida: **Prototipo v0.2.0**
+Estado actual: **Prototipo v0.3.0**
 
 ## Visión de 1.0
 
@@ -59,7 +59,7 @@ Criterios de salida:
 - Codos y rodillas conservan un sentido de flexión estable al mover los objetivos.
 - La compilación de producción termina sin errores.
 
-## Fase 1 — Rig anatómico y estudio de pose usable (v0.3.0)
+## Fase 1 — Rig anatómico y estudio de pose usable (v0.3.0) — completada
 
 **Objetivo:** convertir el visor 3D en una herramienta confiable de referencia artística.
 
@@ -85,6 +85,8 @@ Pruebas:
 - Cero `NaN`, inversiones espontáneas o saltos mayores al cambiar un control.
 
 Criterio de salida: una persona obtiene una silueta distinta y anatómicamente coherente en menos de un minuto, aplica la captura y repite el flujo sin recargar.
+
+Implementado en v0.3.0: solver determinista con límites angulares, polos editables, pies fijables y suelo protegido, controles de cadera/columna/pecho/cabeza, 12 poses versionadas, espejo y copia lateral, transición entre presets, validación de huesos requeridos, modo esqueleto, calidad adaptativa, lectura FPS y pruebas unitarias. La ampliación a una matriz de avatares importados queda vinculada al flujo de importación seguro de la fase 3.
 
 ## Fase 2 — Núcleo del editor y documentos (v0.4.0)
 
@@ -250,4 +252,4 @@ Fuera de 1.0: colaboración simultánea, marketplace, generación automática co
 
 ## Próxima iteración recomendada
 
-Iniciar v0.3.0 con tres líneas coordinadas: límites y polos editables; formato de pose versionado con 12 presets; fixtures y pruebas matemáticas. No ampliar todavía biblioteca ni nube: primero posar debe ser confiable y repetible.
+Iniciar v0.4.0 por el esquema versionado `MangaProject`, IndexedDB y un historial de comandos. Es la base necesaria antes de añadir más contenido: primero el editor debe preservar proyectos multipágina y deshacer cada cambio con precisión.
