@@ -13,7 +13,7 @@
     <div class="brand" aria-label="Manga Studio">
       <span class="brand-mark">M</span>
       <span>MANGA <b>STUDIO</b></span>
-      <span class="badge">PROTOTIPO v0.4.0</span>
+      <span class="badge">PROTOTIPO v0.5.0</span>
     </div>
     <div class="history-tools" aria-label="Historial">
       <button class="icon-btn" id="undoBtn" title="Deshacer" aria-label="Deshacer">↶</button>
@@ -38,6 +38,7 @@
         <button class="asset-tab active" data-tab="characters">Personajes</button>
         <button class="asset-tab" data-tab="bubbles">Texto</button>
         <button class="asset-tab" data-tab="effects">Efectos</button>
+        <button class="asset-tab" data-tab="myAssets">Archivos</button>
       </nav>
 
       <section class="asset-content active" id="characters">
@@ -47,7 +48,7 @@
           <span><b>Akira</b><small>Urbano · 12 poses</small></span>
           <i>＋</i>
         </button>
-        <div class="coming-soon"><span>＋</span><b>Importar personaje</b><small>Disponible en la próxima versión</small></div>
+        <div class="vrm-import"><label><input id="vrmConsent" type="checkbox"> Confirmo que puedo usar este avatar</label><button class="button full" id="importVrmBtn">Importar VRM</button><input id="importVrmInput" type="file" accept=".vrm" hidden><small>VRM 0.x/1.0 · máximo 25 MB</small></div>
       </section>
 
       <section class="asset-content" id="bubbles">
@@ -68,6 +69,14 @@
           <button class="asset-tile dots-preview" data-bg="dots">Trama</button>
           <button class="asset-tile burst-preview" data-bg="burst">Impacto</button>
         </div>
+      </section>
+
+      <section class="asset-content" id="myAssets">
+        <div class="section-heading"><span>Mis recursos</span><button class="tiny-btn" id="importImageBtn">＋ Importar</button></div>
+        <input id="importImageInput" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml" multiple hidden>
+        <input class="asset-search" id="assetSearch" type="search" placeholder="Buscar por nombre o etiqueta" aria-label="Buscar recursos">
+        <div class="asset-library" id="assetLibrary"></div>
+        <p class="asset-empty" id="assetEmpty">Importa PNG, JPEG, WebP o SVG seguro.</p>
       </section>
     </aside>
 
@@ -123,6 +132,11 @@
         <textarea id="textInput" rows="4" maxlength="100"></textarea>
         <label for="fontSize">Tamaño <output id="fontSizeOut">24</output></label>
         <input id="fontSize" type="range" min="14" max="54" value="24" />
+        <label for="fontFamily">Tipografía</label>
+        <select id="fontFamily"><option value="Arial">Manga Sans</option><option value="Georgia">Narrativa Serif</option><option value="Impact">Impacto</option><option value="monospace">Monoespaciada</option></select>
+        <div class="text-grid"><label>Alineación<select id="textAlign"><option value="center">Centro</option><option value="left">Izquierda</option><option value="right">Derecha</option></select></label><label>Interlineado<input id="lineHeight" type="number" min="0.8" max="2" step="0.05" value="1.08"></label></div>
+        <label for="letterSpacing">Espaciado <output id="letterSpacingOut">0</output></label><input id="letterSpacing" type="range" min="-2" max="10" value="0">
+        <div id="bubbleControls"><label for="tailSide">Cola del globo</label><select id="tailSide"><option value="right">Derecha</option><option value="left">Izquierda</option><option value="none">Sin cola</option></select><label for="bubblePadding">Margen interior</label><input id="bubblePadding" type="range" min="6" max="32" value="12"></div>
       </div>
 
       <div class="control-group" id="transformControls">
@@ -146,6 +160,11 @@
           <button class="layout-option two" data-layout="two" aria-label="Dos viñetas"><i></i><i></i></button>
           <button class="layout-option four" data-layout="four" aria-label="Cuatro viñetas"><i></i><i></i><i></i><i></i></button>
         </div>
+        <div class="panel-actions"><button id="mergePanels">− Unir</button><button id="splitPanels">＋ Dividir</button></div>
+        <div class="range-row"><span>Canal</span><input id="panelGutter" type="range" min="8" max="42" value="20"></div>
+        <div class="range-row"><span>Borde</span><input id="panelBorder" type="range" min="2" max="14" value="6"></div>
+        <div class="range-row"><span>Ángulo</span><input id="panelSlant" type="range" min="-30" max="30" value="0"></div>
+        <label class="check-row"><span>Sangrado de página</span><input id="pageBleed" type="checkbox"></label>
         <label for="backgroundSelect">Fondo de escena</label>
         <select id="backgroundSelect">
           <option value="city">Ciudad nocturna</option>
@@ -153,7 +172,19 @@
           <option value="dots">Trama de puntos</option>
           <option value="burst">Impacto radial</option>
           <option value="blank">Blanco limpio</option>
+          <option value="imported">Fondo importado</option>
         </select>
+        <div class="range-row"><span>Opacidad</span><input id="backgroundOpacity" type="range" min="20" max="100" value="100"></div>
+        <div class="range-row"><span>Desenfoque</span><input id="backgroundBlur" type="range" min="0" max="12" value="0"></div>
+        <div class="range-row"><span>Escala</span><input id="backgroundScale" type="range" min="50" max="220" value="100"></div>
+        <div class="range-row"><span>Posición X</span><input id="backgroundOffsetX" type="range" min="-100" max="100" value="0"></div>
+        <div class="range-row"><span>Posición Y</span><input id="backgroundOffsetY" type="range" min="-100" max="100" value="0"></div>
+        <label class="check-row"><span>Fondo monocromo</span><input id="backgroundMonochrome" type="checkbox"></label>
+        <label>Ajustes de trama</label>
+        <div class="range-row"><span>Densidad</span><input id="toneDensity" type="range" min="4" max="18" value="8"></div>
+        <div class="range-row"><span>Escala</span><input id="toneScale" type="range" min="50" max="180" value="100"></div>
+        <div class="range-row"><span>Ángulo</span><input id="toneAngle" type="range" min="-45" max="45" value="0"></div>
+        <label>Plantillas</label><div class="template-grid"><button data-template="dialogue">Diálogo</button><button data-template="action">Acción</button><button data-template="yonkoma">4-koma</button></div>
       </div>
     </aside>
   </main>

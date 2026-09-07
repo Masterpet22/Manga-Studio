@@ -9,6 +9,7 @@ const canvas=document.getElementById('poseCanvas');
 const viewport=document.getElementById('viewport3d');
 const status=document.getElementById('poseStatus');
 let renderer,scene,camera,vrm,model,modelHeight=1.7,groundY=0,raf,opened=false,loading=null;
+let avatarUrl='models/akira.vrm',avatarObjectUrl=null,avatarDirty=false;
 let avatarCenter=new THREE.Vector3(),lastFrame=performance.now();
 let frameCount=0,fpsWindow=performance.now(),qualityLabel='Calidad alta';
 let yaw=.35,pitch=.04,distance=4.5,orbitDrag=null,ikDrag=null,currentPreset='neutral',skeletonHelper=null;
@@ -34,9 +35,14 @@ function setupScene(){
   const floor=new THREE.Mesh(new THREE.CircleGeometry(1.35,64),new THREE.MeshStandardMaterial({color:0x242421,roughness:1,transparent:true,opacity:.8}));floor.name='studio-floor';floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(floor);
   const grid=new THREE.GridHelper(4,20,0x6b5b34,0x343432);grid.name='studio-grid';scene.add(grid);
 }
-async function loadAvatar(){
+function clearAvatar(){
+  if(model){scene.remove(model);model=null}if(skeletonHelper){scene.remove(skeletonHelper);skeletonHelper=null}
+  Object.values(targets).forEach(target=>scene.remove(target));for(const key of Object.keys(targets))delete targets[key];for(const key of Object.keys(chains))delete chains[key];for(const key of Object.keys(targetBases))delete targetBases[key];
+  baseRotations.clear();clothMaterials.length=0;vrm=null;
+}
+async function loadAvatar(url=avatarUrl){
   const loader=new GLTFLoader();loader.register(parser=>new VRMLoaderPlugin(parser));
-  const gltf=await new Promise((resolve,reject)=>loader.load('models/akira.vrm',resolve,event=>{if(event.total)setStatus(`Cargando avatar VRM · ${Math.round(event.loaded/event.total*100)}%`)},reject));
+  const gltf=await new Promise((resolve,reject)=>loader.load(url,resolve,event=>{if(event.total)setStatus(`Cargando avatar VRM · ${Math.round(event.loaded/event.total*100)}%`)},reject));
   vrm=gltf.userData.vrm;if(!vrm)throw new Error('El archivo no contiene un avatar VRM válido.');
   document.getElementById('rigState').innerHTML=`<i></i> VRM ${vrm.meta?.metaVersion||'compatible'} · IK anatómico`;
   model=vrm.scene;scene.add(model);model.traverse(object=>{if(!object.isMesh)return;object.castShadow=true;object.receiveShadow=true;const list=Array.isArray(object.material)?object.material:[object.material];list.forEach(material=>{if(material.color&&!material.userData.originalColor)material.userData.originalColor=material.color.clone();if(material.name.includes('_CLOTH')&&!clothMaterials.includes(material))clothMaterials.push(material)})});
@@ -123,11 +129,12 @@ function cameraUpdate(){const targetY=modelHeight*.52;camera.position.set(Math.s
 function render(){if(renderer&&scene&&camera){const now=performance.now();vrm?.update(Math.min((now-lastFrame)/1000,.05));lastFrame=now;renderer.render(scene,camera);frameCount++;if(now-fpsWindow>=1000){const fps=Math.round(frameCount*1000/(now-fpsWindow));document.getElementById('qualityState').textContent=`${qualityLabel} · ${fps} FPS`;frameCount=0;fpsWindow=now}}}
 function animate(){raf=requestAnimationFrame(animate);if(opened)render()}
 function resize(){if(!renderer)return;const w=viewport.clientWidth,h=viewport.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();cameraUpdate()}
-async function init(){if(renderer&&vrm)return;setupScene();resize();loading=loadAvatar();await loading;animate()}
+async function init(){if(!renderer)setupScene();resize();if(!vrm||avatarDirty){clearAvatar();loading=loadAvatar(avatarUrl);await loading;avatarDirty=false}if(!raf)animate()}
 function pointerCoords(event){const rect=canvas.getBoundingClientRect();pointer.set((event.clientX-rect.left)/rect.width*2-1,-((event.clientY-rect.top)/rect.height)*2+1)}
 function close(){modal.hidden=true;document.body.style.overflow='';opened=false}
 
 window.addEventListener('pose3d:open',async()=>{opened=true;setStatus('Cargando estudio VRM…');try{await init();setStatus('','ready');setTimeout(resize,30)}catch(error){opened=false;setStatus('No fue posible cargar el avatar VRM. Puedes cerrar esta ventana y continuar con el editor.','error');console.error(error)}});
+window.addEventListener('pose3d:load-avatar',event=>{const blob=event.detail?.blob;if(!blob)return;if(avatarObjectUrl)URL.revokeObjectURL(avatarObjectUrl);avatarObjectUrl=URL.createObjectURL(blob);avatarUrl=avatarObjectUrl;avatarDirty=true;setStatus(`Avatar ${event.detail?.name||'VRM'} preparado`)});
 window.addEventListener('pose3d:close',()=>{opened=false});
 document.querySelectorAll('#posePresets button').forEach(button=>button.onclick=()=>transitionPreset(button.dataset.preset));
 ['ikLeftHandY','ikRightHandY','ikLeftFootZ','ikRightFootZ'].forEach(id=>{document.getElementById(id).oninput=event=>sliderMove(id,+event.target.value)});

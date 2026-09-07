@@ -1,7 +1,7 @@
 # Roadmap de Manga Studio hacia 1.0
 
 Última actualización: 7 de septiembre de 2026  
-Estado actual: **Prototipo v0.4.0**
+Estado actual: **Prototipo v0.5.0**
 
 ## Visión de 1.0
 
@@ -117,7 +117,7 @@ Criterio de salida: un proyecto de diez páginas sobrevive recargas y sesiones, 
 
 Implementado en v0.4.0: esquema `MangaProject` v2 con migración del documento legado, IndexedDB y autosave con miniaturas; gestor para crear, renombrar, duplicar y eliminar proyectos; páginas añadibles, duplicables, eliminables y reordenables; historial de comandos por página; selección múltiple, movimiento, escala y rotación directa; guías y alineación; capas con orden, nombre, visibilidad, bloqueo y grupos; asignación y recorte por viñeta; cancelación con Escape y pipeline reproducible desde `src/` hacia `dist/`.
 
-## Fase 3 — Herramientas manga y biblioteca (v0.5.0)
+## Fase 3 — Herramientas manga y biblioteca (v0.5.0) — completada
 
 **Objetivo:** producir páginas ricas sin depender de software externo.
 
@@ -136,6 +136,8 @@ Trabajo:
 Pruebas: texto largo y CJK/latino; fuentes ausentes; archivos válidos, dañados y enormes; comparación visual de tramas y globos.
 
 Criterio de salida: se puede crear una página original completa usando assets propios, texto y efectos configurables.
+
+Implementado en v0.5.0: esquema documental v3 con migración automática; división y unión de viñetas, canal, borde, inclinación y guía de sangrado; edición directa de texto en el lienzo, familias seguras, alineación, tracking, interlineado y padding; globos de diálogo y pensamiento con cola orientable; tramas de puntos, velocidad e impacto con densidad, escala y ángulo; fondos importados con escala, posición, opacidad, desenfoque y monocromo; biblioteca local buscable y ordenada por uso reciente; validación de tipo/tamaño y filtrado conservador de SVG; importación VRM local con consentimiento, comprobación GLB y recarga del estudio 3D; plantillas de diálogo, acción y 4-koma. La comparación visual CJK/multinavegador y la matriz amplia de VRM siguen como validación transversal antes de beta.
 
 ## Fase 4 — Exportación e interoperabilidad (v0.6.0)
 
@@ -254,4 +256,4 @@ Fuera de 1.0: colaboración simultánea, marketplace, generación automática co
 
 ## Próxima iteración recomendada
 
-Iniciar v0.5.0 por la edición directa de texto y globos, seguida de viñetas configurables, tramas y la importación segura de assets. El documento ya puede preservar esas nuevas herramientas sin perder compatibilidad.
+Iniciar v0.6.0 por la exportación por lotes y perfiles de tamaño, seguida del formato portable `.mangastudio`, su importación validada y el PDF multipágina. La biblioteca y el esquema v3 ya permiten empaquetar recursos sin perder compatibilidad.

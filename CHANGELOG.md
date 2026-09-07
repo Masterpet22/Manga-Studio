@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.0 — 2026-09-07
+
+- Esquema documental v3 con migración automática y ajustes persistentes de viñeta, trama y fondo.
+- División/unión de viñetas, canal, borde, inclinación, sangrado y tres plantillas manga.
+- Edición directa de texto, tipografías seguras, alineación, tracking, interlineado y padding.
+- Globos con cola orientable y variantes de diálogo, pensamiento, grito, narración y efecto.
+- Tramas configurables de puntos, velocidad e impacto.
+- Fondos importados con escala, posición, opacidad, desenfoque y modo monocromo.
+- Biblioteca local con miniaturas, etiquetas, búsqueda y orden reciente.
+- Importación validada de PNG/JPEG/WebP/SVG y rechazo de contenido SVG activo.
+- Importación VRM con consentimiento, límites de tamaño, validación GLB y carga en el estudio 3D.
+- Catorce pruebas automatizadas para documentos, migración, historial, IK y seguridad de archivos.
+
 ## 0.4.0 — 2026-09-07
 
 - Esquema documental v2 y migración automática de la página guardada por v0.3.

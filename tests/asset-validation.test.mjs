@@ -1,0 +1,6 @@
+import test from'node:test';import assert from'node:assert/strict';import{MAX_IMAGE_BYTES,svgLooksSafe,validateAssetFile}from'../src/asset-validation.js';
+test('accepts supported images within the limit',()=>assert.equal(validateAssetFile({name:'panel.webp',type:'image/webp',size:1024}).ok,true));
+test('rejects oversized or unsupported images',()=>{assert.equal(validateAssetFile({name:'huge.png',type:'image/png',size:MAX_IMAGE_BYTES+1}).ok,false);assert.equal(validateAssetFile({name:'x.exe',type:'application/octet-stream',size:20}).ok,false)});
+test('requires VRM extension and size limit',()=>{assert.equal(validateAssetFile({name:'hero.vrm',size:1024},'vrm').ok,true);assert.equal(validateAssetFile({name:'hero.glb',size:1024},'vrm').ok,false)});
+test('rejects active SVG content',()=>{assert.equal(svgLooksSafe('<svg><path d="M0 0"/></svg>'),true);assert.equal(svgLooksSafe('<svg><script>alert(1)</script></svg>'),false);assert.equal(svgLooksSafe('<svg><image onload="alert(1)"/></svg>'),false)});
+test('rejects external SVG references and entities',()=>{assert.equal(svgLooksSafe('<svg><image href="https://example.com/a.png"/></svg>'),false);assert.equal(svgLooksSafe('<!DOCTYPE svg><svg/>'),false)});
