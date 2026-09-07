@@ -1,9 +1,12 @@
 {
   "name": "manga-studio-prototype",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "type": "module",
   "private": true,
   "scripts": {
+    "build": "npm run build:static && npm run build:app && npm run build:3d",
+    "build:static": "node scripts/build-static.mjs",
+    "build:app": "esbuild src/editor.js --bundle --format=iife --minify --outfile=dist/app.js",
     "build:3d": "esbuild src/poser3d-vrm.js --bundle --format=esm --minify --outfile=dist/poser3d.js",
     "test": "node --test tests/*.test.mjs",
     "model:prepare": "node scripts/strip-vrm-thumbnail.mjs"

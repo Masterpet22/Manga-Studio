@@ -1,7 +1,7 @@
 # Roadmap de Manga Studio hacia 1.0
 
 Última actualización: 7 de septiembre de 2026  
-Estado actual: **Prototipo v0.3.0**
+Estado actual: **Prototipo v0.4.0**
 
 ## Visión de 1.0
 
@@ -88,7 +88,7 @@ Criterio de salida: una persona obtiene una silueta distinta y anatómicamente c
 
 Implementado en v0.3.0: solver determinista con límites angulares, polos editables, pies fijables y suelo protegido, controles de cadera/columna/pecho/cabeza, 12 poses versionadas, espejo y copia lateral, transición entre presets, validación de huesos requeridos, modo esqueleto, calidad adaptativa, lectura FPS y pruebas unitarias. La ampliación a una matriz de avatares importados queda vinculada al flujo de importación seguro de la fase 3.
 
-## Fase 2 — Núcleo del editor y documentos (v0.4.0)
+## Fase 2 — Núcleo del editor y documentos (v0.4.0) — completada
 
 **Objetivo:** que editar una página sea preciso, reversible y recuperable.
 
@@ -114,6 +114,8 @@ Pruebas:
 - Interacciones de puntero, tacto y teclado.
 
 Criterio de salida: un proyecto de diez páginas sobrevive recargas y sesiones, y toda edición principal se puede deshacer sin inconsistencias.
+
+Implementado en v0.4.0: esquema `MangaProject` v2 con migración del documento legado, IndexedDB y autosave con miniaturas; gestor para crear, renombrar, duplicar y eliminar proyectos; páginas añadibles, duplicables, eliminables y reordenables; historial de comandos por página; selección múltiple, movimiento, escala y rotación directa; guías y alineación; capas con orden, nombre, visibilidad, bloqueo y grupos; asignación y recorte por viñeta; cancelación con Escape y pipeline reproducible desde `src/` hacia `dist/`.
 
 ## Fase 3 — Herramientas manga y biblioteca (v0.5.0)
 
@@ -252,4 +254,4 @@ Fuera de 1.0: colaboración simultánea, marketplace, generación automática co
 
 ## Próxima iteración recomendada
 
-Iniciar v0.4.0 por el esquema versionado `MangaProject`, IndexedDB y un historial de comandos. Es la base necesaria antes de añadir más contenido: primero el editor debe preservar proyectos multipágina y deshacer cada cambio con precisión.
+Iniciar v0.5.0 por la edición directa de texto y globos, seguida de viñetas configurables, tramas y la importación segura de assets. El documento ya puede preservar esas nuevas herramientas sin perder compatibilidad.
