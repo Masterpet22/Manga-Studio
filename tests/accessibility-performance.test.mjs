@@ -18,6 +18,7 @@ test('provides the primary keyboard and assistive-technology landmarks',()=>{
 test('keeps the heavyweight 3D editor off the initial critical path',()=>{
   assert.doesNotMatch(html,/src="poser3d\.js"/);
   assert.match(editor,/import\(moduleUrl\)/);
+  assert.match(editor,/poser3d\.js\?v=0\.7\.5/);
 });
 
 test('offers responsive workspace navigation and persistent preferences',()=>{

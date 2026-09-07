@@ -8,6 +8,7 @@
 - Giro del avatar 3D sobre su propio eje sin alterar la cámara ni invertir sus extremidades.
 - Preferencias rediseñadas como controles segmentados estables y accesibles.
 - Cambio automático a la navegación compacta antes de que el espacio de trabajo produzca desbordamiento horizontal.
+- Recursos estáticos versionados para evitar mezclas de interfaz al actualizar desde la caché de GitHub Pages.
 - Migración automática del esquema documental v3 a v4 sin perder la configuración visual previa.
 - Treinta y tres pruebas automatizadas y verificación funcional en navegador.
 

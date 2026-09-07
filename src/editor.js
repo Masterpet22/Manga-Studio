@@ -128,7 +128,7 @@ function closeUtilityModal(id){const modal=document.getElementById(id);modal.hid
 function trapModalFocus(event){const modal=event.currentTarget;if(event.key!=='Tab')return;const focusables=modalFocusables(modal);if(!focusables.length)return;const first=focusables[0],last=focusables.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus()}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus()}}
 function setWorkspaceView(view){preferences.workspaceView=view;savePreferences();const target=view==='assets'?document.getElementById('assetPanel'):view==='inspector'?document.getElementById('inspectorPanel'):canvas;requestAnimationFrame(()=>target.focus?.())}
 function setPreference(key,value){preferences=normalizePreferences({...preferences,[key]:key==='autosaveDelay'?+value:value});savePreferences();announce('Preferencia aplicada')}
-async function ensurePose3d(){if(!poseModulePromise){const moduleUrl=new URL('poser3d.js',document.baseURI).href;poseModulePromise=import(moduleUrl).catch(error=>{poseModulePromise=null;throw error})}return poseModulePromise}
+async function ensurePose3d(){if(!poseModulePromise){const moduleUrl=new URL('poser3d.js?v=0.7.5',document.baseURI).href;poseModulePromise=import(moduleUrl).catch(error=>{poseModulePromise=null;throw error})}return poseModulePromise}
 
 function bindControls(){
   document.querySelectorAll('.asset-tab').forEach(button=>button.onclick=()=>{document.querySelectorAll('.asset-tab,.asset-content').forEach(item=>item.classList.remove('active'));button.classList.add('active');document.getElementById(button.dataset.tab).classList.add('active')});
