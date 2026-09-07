@@ -1,0 +1,19 @@
+{
+  "name": "manga-studio-prototype",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "build:3d": "esbuild src/poser3d-vrm.js --bundle --format=esm --minify --outfile=dist/poser3d.js",
+    "model:prepare": "node scripts/strip-vrm-thumbnail.mjs"
+  },
+  "dependencies": {
+    "@pixiv/three-vrm": "3.5.5",
+    "three": "0.185.1"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  }
+}

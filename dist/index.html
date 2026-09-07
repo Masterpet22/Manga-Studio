@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#141414" />
+  <title>Manga Studio</title>
+  <meta name="description" content="Prototipo de editor visual para crear páginas de manga." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand" aria-label="Manga Studio">
+      <span class="brand-mark">M</span>
+      <span>MANGA <b>STUDIO</b></span>
+      <span class="badge">PROTOTIPO v0.2.0</span>
+    </div>
+    <div class="history-tools" aria-label="Historial">
+      <button class="icon-btn" id="undoBtn" title="Deshacer" aria-label="Deshacer">↶</button>
+      <button class="icon-btn" id="redoBtn" title="Rehacer" aria-label="Rehacer">↷</button>
+      <span class="save-state" id="saveState">Guardado local</span>
+    </div>
+    <div class="top-actions">
+      <button class="button ghost" id="newBtn">Nueva página</button>
+      <button class="button primary" id="exportBtn">Descargar PNG</button>
+    </div>
+  </header>
+
+  <main class="studio-shell">
+    <aside class="asset-panel">
+      <nav class="asset-tabs" aria-label="Recursos">
+        <button class="asset-tab active" data-tab="characters">Personajes</button>
+        <button class="asset-tab" data-tab="bubbles">Texto</button>
+        <button class="asset-tab" data-tab="effects">Efectos</button>
+      </nav>
+
+      <section class="asset-content active" id="characters">
+        <div class="section-heading"><span>Biblioteca</span><button class="tiny-btn" id="addCharacter">+ Añadir</button></div>
+        <button class="character-card" id="characterCard">
+          <img src="akira.png" alt="Akira, personaje manga" />
+          <span><b>Akira</b><small>Urbano · 6 poses</small></span>
+          <i>＋</i>
+        </button>
+        <div class="coming-soon"><span>＋</span><b>Importar personaje</b><small>Disponible en la próxima versión</small></div>
+      </section>
+
+      <section class="asset-content" id="bubbles">
+        <div class="section-heading"><span>Globos y texto</span></div>
+        <div class="asset-grid">
+          <button class="asset-tile bubble-preview round" data-add="bubble">Diálogo</button>
+          <button class="asset-tile bubble-preview shout" data-add="shout">¡Grito!</button>
+          <button class="asset-tile caption-preview" data-add="caption">NARRACIÓN</button>
+          <button class="asset-tile thought-preview" data-add="thought">Pensamiento</button>
+        </div>
+      </section>
+
+      <section class="asset-content" id="effects">
+        <div class="section-heading"><span>Efectos manga</span></div>
+        <div class="asset-grid">
+          <button class="asset-tile fx-preview" data-add="fx">¡BAM!</button>
+          <button class="asset-tile speed-preview" data-bg="speed">Líneas</button>
+          <button class="asset-tile dots-preview" data-bg="dots">Trama</button>
+          <button class="asset-tile burst-preview" data-bg="burst">Impacto</button>
+        </div>
+      </section>
+    </aside>
+
+    <section class="workspace">
+      <div class="workspace-bar">
+        <div>
+          <b>Página 01</b>
+          <span>600 × 800 px</span>
+        </div>
+        <div class="zoom-tools">
+          <button class="icon-btn" id="zoomOut" aria-label="Alejar">−</button>
+          <span id="zoomLabel">82%</span>
+          <button class="icon-btn" id="zoomIn" aria-label="Acercar">＋</button>
+          <button class="icon-btn" id="fitBtn" aria-label="Ajustar">⌗</button>
+        </div>
+      </div>
+      <div class="canvas-stage" id="canvasStage">
+        <canvas id="mangaCanvas" width="600" height="800" aria-label="Página de manga editable"></canvas>
+      </div>
+      <div class="hint">Arrastra para mover · Rueda para escalar · Supr para eliminar</div>
+    </section>
+
+    <aside class="inspector">
+      <div class="inspector-head">
+        <div><span class="eyebrow">SELECCIÓN</span><b id="selectionName">Akira</b></div>
+        <button class="icon-btn danger" id="deleteBtn" title="Eliminar">⌫</button>
+      </div>
+
+      <div class="control-group" id="characterControls">
+        <button class="pose3d-launch" id="openPose3d">
+          <span class="cube-icon">◆</span>
+          <span><b>Editar pose en 3D</b><small>Articula el cuerpo y ajusta la cámara</small></span>
+          <span>›</span>
+        </button>
+        <label>Pose</label>
+        <div class="segmented" id="poseControl">
+          <button class="active" data-pose="neutral">Neutral</button>
+          <button data-pose="hero">Heroica</button>
+          <button data-pose="action">Acción</button>
+        </div>
+        <label>Expresión</label>
+        <select id="expressionSelect">
+          <option value="neutral">Segura</option>
+          <option value="happy">Alegre</option>
+          <option value="angry">Intensa</option>
+          <option value="surprised">Sorpresa</option>
+        </select>
+      </div>
+
+      <div class="control-group" id="textControls" hidden>
+        <label for="textInput">Contenido</label>
+        <textarea id="textInput" rows="4" maxlength="100"></textarea>
+        <label for="fontSize">Tamaño <output id="fontSizeOut">24</output></label>
+        <input id="fontSize" type="range" min="14" max="54" value="24" />
+      </div>
+
+      <div class="control-group">
+        <label>Transformar</label>
+        <div class="range-row"><span>Tamaño</span><input id="scaleRange" type="range" min="30" max="180" value="100" /></div>
+        <div class="range-row"><span>Rotación</span><input id="rotateRange" type="range" min="-30" max="30" value="0" /></div>
+        <button class="button full" id="flipBtn">Voltear horizontal</button>
+      </div>
+
+      <div class="control-group page-controls">
+        <label>Diseño de viñetas</label>
+        <div class="layout-picker" id="layoutPicker">
+          <button class="layout-option active" data-layout="cinematic" aria-label="Diseño cinematográfico"><i></i><i></i><i></i></button>
+          <button class="layout-option two" data-layout="two" aria-label="Dos viñetas"><i></i><i></i></button>
+          <button class="layout-option four" data-layout="four" aria-label="Cuatro viñetas"><i></i><i></i><i></i><i></i></button>
+        </div>
+        <label for="backgroundSelect">Fondo de escena</label>
+        <select id="backgroundSelect">
+          <option value="city">Ciudad nocturna</option>
+          <option value="speed">Líneas de velocidad</option>
+          <option value="dots">Trama de puntos</option>
+          <option value="burst">Impacto radial</option>
+          <option value="blank">Blanco limpio</option>
+        </select>
+      </div>
+    </aside>
+  </main>
+
+  <div class="pose-modal" id="poseModal" hidden>
+    <div class="pose-dialog" role="dialog" aria-modal="true" aria-labelledby="poseTitle">
+      <header class="pose-header">
+        <div><span class="eyebrow">ESTUDIO 3D</span><h2 id="poseTitle">Posar a Akira</h2></div>
+        <div class="pose-head-actions"><span class="live-chip"><i></i> VRM + IK 2-BONE</span><button class="icon-btn" id="closePose3d" aria-label="Cerrar">×</button></div>
+      </header>
+      <div class="pose-body">
+        <section class="viewport3d" id="viewport3d">
+          <canvas id="poseCanvas" aria-label="Visor 3D articulado"></canvas>
+          <div class="pose-status" id="poseStatus"><span></span><b>Cargando estudio 3D…</b></div>
+          <div class="view-cube" aria-hidden="true"><span>FRENTE</span></div>
+          <div class="viewport-hint">Arrastra los nodos IK · Fondo para orbitar · Rueda para acercar</div>
+          <div class="axis-legend"><span class="axis-x">X</span><span class="axis-y">Y</span><span class="axis-z">Z</span></div>
+        </section>
+        <aside class="pose-controls">
+          <div class="pose-section">
+            <label>Poses base</label>
+            <div class="pose-presets" id="posePresets">
+              <button class="active" data-preset="neutral">Neutral</button>
+              <button data-preset="hero">Heroica</button>
+              <button data-preset="action">Acción</button>
+              <button data-preset="run">Corriendo</button>
+              <button data-preset="guard">Defensa</button>
+              <button data-preset="wave">Saludo</button>
+            </div>
+          </div>
+          <div class="pose-section">
+            <label>Objetivos IK</label>
+            <p class="pose-help">Mueve los cuatro nodos luminosos directamente sobre el personaje.</p>
+            <div class="ik-key"><span><i class="hand-key"></i>Manos</span><span><i class="foot-key"></i>Pies</span></div>
+            <div class="joint-row"><span>Mano izq.</span><input id="ikLeftHandY" type="range" min="-80" max="80" value="0"></div>
+            <div class="joint-row"><span>Mano der.</span><input id="ikRightHandY" type="range" min="-80" max="80" value="0"></div>
+            <div class="joint-row"><span>Pie izq.</span><input id="ikLeftFootZ" type="range" min="-80" max="80" value="0"></div>
+            <div class="joint-row"><span>Pie der.</span><input id="ikRightFootZ" type="range" min="-80" max="80" value="0"></div>
+          </div>
+          <div class="pose-section">
+            <label>Ropa</label>
+            <div class="wardrobe" id="wardrobe">
+              <button class="active" data-outfit="original"><i class="swatch original"></i>Original</button>
+              <button data-outfit="amber"><i class="swatch amber"></i>Ámbar</button>
+              <button data-outfit="ink"><i class="swatch ink"></i>Tinta</button>
+            </div>
+          </div>
+          <div class="pose-section camera-controls">
+            <label>Cámara</label>
+            <div class="camera-buttons">
+              <button data-camera="front">Frente</button><button data-camera="threequarter">¾</button><button data-camera="profile">Perfil</button>
+            </div>
+            <label class="toggle-row"><span>Contorno manga</span><input id="outlineToggle" type="checkbox" checked></label>
+          </div>
+        </aside>
+      </div>
+      <footer class="pose-footer">
+        <span>La captura tendrá fondo transparente.</span>
+        <div><button class="button ghost" id="resetPose3d">Restablecer</button><button class="button primary" id="applyPose3d">Aplicar a la viñeta</button></div>
+      </footer>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+  <script type="module" src="poser3d.js"></script>
+</body>
+</html>

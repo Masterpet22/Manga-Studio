@@ -1,0 +1,13 @@
+Manga Studio includes the following open-source runtime libraries:
+
+- Three.js 0.185.1 — MIT License — Copyright 2010-2026 Three.js Authors
+- @pixiv/three-vrm 3.5.5 and its component packages — MIT License — pixiv Inc.
+
+The bundled avatar is VRM1_Constraint_Twist_Sample v1.0.1,
+Copyright (c) 2022 pixiv Inc. Its embedded VRM metadata permits
+redistribution and modification under the VRM 1.0 license.
+
+Sources:
+https://threejs.org/
+https://github.com/pixiv/three-vrm
+https://vrm.dev/licenses/1.0/
