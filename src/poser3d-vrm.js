@@ -18,7 +18,9 @@ const targets={},chains={},baseRotations=new Map(),clothMaterials=[];
 const rigSide={left:1,right:-1};
 const targetBases={},footLocks={leftFoot:false,rightFoot:false};
 let activeBody={},activePoles={arms:-.18,legs:.30},bodyAdjustments={hipsY:0,spineX:0,chestX:0,headY:0},poseTween=0;
-const lowPower=(navigator.hardwareConcurrency||8)<=4||(navigator.deviceMemory||8)<=4;
+const detectedLowPower=(navigator.hardwareConcurrency||8)<=4||(navigator.deviceMemory||8)<=4;
+let qualityPreference='auto';try{qualityPreference=JSON.parse(localStorage.getItem('manga-studio-preferences-v1')||'{}').quality||'auto'}catch{}
+const efficientQuality=()=>qualityPreference==='efficient'||(qualityPreference==='auto'&&detectedLowPower);
 
 function setStatus(message,type='loading'){
   status.className='pose-status'+(type==='ready'?' ready':type==='error'?' error':'');
@@ -26,8 +28,8 @@ function setStatus(message,type='loading'){
 }
 function setupScene(){
   renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,preserveDrawingBuffer:true});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,lowPower?1:2));renderer.shadowMap.enabled=!lowPower;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.setClearColor(0x000000,0);
-  qualityLabel=lowPower?'Calidad eficiente':'Calidad alta';document.getElementById('qualityState').textContent=qualityLabel;
+  renderer.setPixelRatio(Math.min(devicePixelRatio,efficientQuality()?1:2));renderer.shadowMap.enabled=!efficientQuality();renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.setClearColor(0x000000,0);
+  qualityLabel=efficientQuality()?'Calidad eficiente':'Calidad alta';document.getElementById('qualityState').textContent=qualityLabel;
   scene=new THREE.Scene();scene.background=null;camera=new THREE.PerspectiveCamera(30,1,.05,50);
   scene.add(new THREE.HemisphereLight(0xffffff,0x25283a,2.4));
   const key=new THREE.DirectionalLight(0xffe1a1,3.1);key.position.set(3,5,4);key.castShadow=true;scene.add(key);
@@ -136,6 +138,7 @@ function close(){modal.hidden=true;document.body.style.overflow='';opened=false}
 window.addEventListener('pose3d:open',async()=>{opened=true;setStatus('Cargando estudio VRM…');try{await init();setStatus('','ready');setTimeout(resize,30)}catch(error){opened=false;setStatus('No fue posible cargar el avatar VRM. Puedes cerrar esta ventana y continuar con el editor.','error');console.error(error)}});
 window.addEventListener('pose3d:load-avatar',event=>{const blob=event.detail?.blob;if(!blob)return;if(avatarObjectUrl)URL.revokeObjectURL(avatarObjectUrl);avatarObjectUrl=URL.createObjectURL(blob);avatarUrl=avatarObjectUrl;avatarDirty=true;setStatus(`Avatar ${event.detail?.name||'VRM'} preparado`)});
 window.addEventListener('pose3d:close',()=>{opened=false});
+window.addEventListener('pose3d:quality',event=>{qualityPreference=event.detail?.quality||'auto';if(!renderer)return;renderer.setPixelRatio(Math.min(devicePixelRatio,efficientQuality()?1:2));renderer.shadowMap.enabled=!efficientQuality();qualityLabel=efficientQuality()?'Calidad eficiente':'Calidad alta';document.getElementById('qualityState').textContent=qualityLabel;resize()});
 document.querySelectorAll('#posePresets button').forEach(button=>button.onclick=()=>transitionPreset(button.dataset.preset));
 ['ikLeftHandY','ikRightHandY','ikLeftFootZ','ikRightFootZ'].forEach(id=>{document.getElementById(id).oninput=event=>sliderMove(id,+event.target.value)});
 ['poleLeftElbow','poleRightElbow','poleLeftKnee','poleRightKnee'].forEach(id=>{document.getElementById(id).oninput=()=>{markCustom();solveAll()}});

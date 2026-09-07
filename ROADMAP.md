@@ -1,7 +1,7 @@
 # Roadmap de Manga Studio hacia 1.0
 
 Última actualización: 7 de septiembre de 2026  
-Estado actual: **Prototipo v0.6.0**
+Estado actual: **Prototipo v0.7.0**
 
 ## Visión de 1.0
 
@@ -159,7 +159,7 @@ Criterio de salida: los resultados coinciden con el editor y un respaldo abre en
 
 Implementado en v0.6.0: exportación de página actual o lote en PNG/JPEG/WebP, escalas 1×–3× y dimensiones personalizadas; perfiles web, A4 y B5 con DPI real, sangrado de 3 mm y marcas de corte; PDF multipágina con orden y dimensiones físicas; formato `.mangastudio` basado en ZIP con manifiesto, recursos separados y checksums SHA-256; importación con verificación de integridad, límites de tamaño/descompresión, rutas seguras, rechazo de entradas inesperadas, vista previa y migración; avisos de recursos de baja resolución, elementos fuera de página y fuentes ausentes; render fuera de pantalla con fallback de canvas y límites de memoria para lotes. El proyecto de estrés de 40 páginas queda como prueba transversal de rendimiento para la fase 5.
 
-## Fase 5 — UX, accesibilidad y rendimiento (v0.7.0)
+## Fase 5 — UX, accesibilidad y rendimiento (v0.7.0) — completada
 
 **Objetivo:** que el flujo sea comprensible y rápido en escritorio y tablet.
 
@@ -177,6 +177,8 @@ Trabajo:
 Pruebas: auditoría WCAG 2.2 AA; Chrome, Edge, Firefox y Safari; escritorio/tablet; CPU/GPU limitadas y almacenamiento interrumpido.
 
 Criterio de salida: todos los flujos esenciales funcionan con teclado y tacto dentro de los presupuestos acordados.
+
+Implementado en v0.7.0: paneles plegables en escritorio y navegación inferior por áreas en tablet/móvil; preferencias persistentes de tema, densidad, movimiento, calidad 3D, unidades, autoguardado y espacio de trabajo; onboarding y guía de atajos; enlace para saltar al editor, foco visible, nombres asociados a controles, regiones de estado y manipulación por teclado; tamaño táctil reforzado y soporte de movimiento reducido; estados vacíos y rendimiento visible; selector y virtualización del riel para proyectos extensos; miniaturas con carga diferida; personaje 2D reducido de 1,7 MB a 314 KB; estudio 3D de 755 KB y avatar VRM de 9,5 MB fuera de la ruta inicial. La suite sube a 29 pruebas y el smoke audit comprueba nombres, desbordamiento y recursos en 390 × 844 y 1440 × 1000. La validación manual con lectores de pantalla, Safari y hardware físico permanece como control transversal antes de la beta, por lo que esta entrega no se presenta como certificación formal WCAG.
 
 ## Fase 6 — Privacidad y confiabilidad (v0.8.0)
 

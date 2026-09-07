@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.7.0 — 2026-09-07
+
+- Interfaz adaptable con paneles plegables en escritorio y navegación inferior en tablet/móvil.
+- Preferencias persistentes de tema, densidad, movimiento, calidad 3D, unidades y autoguardado.
+- Onboarding, ayuda de atajos, enlace de salto, foco visible y anuncios accesibles de estado.
+- Movimiento de elementos por teclado y controles con nombres asociados.
+- Riel de páginas virtualizado con selector directo para proyectos extensos.
+- Estudio 3D y avatar VRM cargados bajo demanda; calidad eficiente/alta configurable.
+- Personaje inicial optimizado de 1,7 MB a 314 KB y carga diferida de miniaturas.
+- Auditoría reproducible de navegador para viewport, overflow, controles y recursos críticos.
+- Veintinueve pruebas automatizadas; smoke visual aprobado en escritorio y móvil.
+
 ## 0.6.0 — 2026-09-07
 
 - Exportación de una página o lote en PNG, JPEG y WebP a 1×, 2×, 3× o tamaño personalizado.

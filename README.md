@@ -2,7 +2,7 @@
 
 Prototipo web de un editor de manga con composición 2D y estudio de poses 3D.
 
-**Estado actual: Prototipo v0.6.0.** El editor ya permite construir, respaldar y exportar proyectos multipágina para web o impresión; el camino hasta la versión 1.0 está definido en [ROADMAP.md](ROADMAP.md).
+**Estado actual: Prototipo v0.7.0.** El editor ya permite construir, respaldar y exportar proyectos multipágina desde una interfaz adaptable, accesible por teclado y configurable; el camino hasta la versión 1.0 está definido en [ROADMAP.md](ROADMAP.md).
 
 ## Funciones principales
 
@@ -15,8 +15,11 @@ Prototipo web de un editor de manga con composición 2D y estudio de poses 3D.
 - PDF multipágina y respaldo portable `.mangastudio` con recursos, manifiesto y checksums SHA-256.
 - Importación validada con vista previa, límites contra ZIP bombs y rechazo de contenido inesperado.
 - Proyectos multipágina con IndexedDB, autosave, miniaturas y migración desde v0.3.
+- Paneles plegables en escritorio y navegación por áreas en tablet/móvil.
+- Tema claro/oscuro/sistema, densidad, movimiento reducido, unidades, calidad 3D y frecuencia de autoguardado persistentes.
+- Onboarding, ayuda de atajos, foco visible, anuncios de estado y movimiento del lienzo por teclado.
+- Riel de páginas virtualizado, imágenes optimizadas y carga diferida del estudio 3D y el avatar VRM.
 - Capas visibles/bloqueables, grupos, orden, selección múltiple, guías y alineación.
-- Exportación de páginas a PNG.
 - Avatar VRM 1.0 con esqueleto humanoide.
 - Doce poses versionadas con torso diferenciado, transición e IK de dos huesos limitado.
 - Polos editables de codos/rodillas, bloqueo de pies, espejo y copia lateral.
@@ -64,4 +67,4 @@ Consulta `dist/THIRD_PARTY_NOTICES.txt` y `dist/models/NOTICE.txt`.
 
 ## Estado del producto
 
-La versión 0.6.0 completa la salida e interoperabilidad: exporta imágenes y PDF multipágina, incorpora perfiles de impresión y permite mover un proyecto íntegro entre navegadores mediante `.mangastudio`. Todavía es un prototipo: la sincronización es local al dispositivo y faltan las rondas amplias de accesibilidad, rendimiento y compatibilidad multinavegador.
+La versión 0.7.0 completa la primera gran revisión de experiencia, accesibilidad y rendimiento. La carga inicial ya no descarga el estudio 3D ni el avatar de 9,5 MB, y los flujos principales disponen de navegación adaptable y soporte de teclado. Todavía es un prototipo: la sincronización es local al dispositivo y la validación manual con lectores de pantalla, Safari y hardware físico continúa antes de la beta.
