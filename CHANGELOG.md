@@ -7,6 +7,7 @@
 - Recorte configurable por personaje, imagen o globo para permitir composiciones que atraviesen bordes.
 - Giro del avatar 3D sobre su propio eje sin alterar la cámara ni invertir sus extremidades.
 - Preferencias rediseñadas como controles segmentados estables y accesibles.
+- Cambio automático a la navegación compacta antes de que el espacio de trabajo produzca desbordamiento horizontal.
 - Migración automática del esquema documental v3 a v4 sin perder la configuración visual previa.
 - Treinta y tres pruebas automatizadas y verificación funcional en navegador.
 

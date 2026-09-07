@@ -25,6 +25,7 @@ test('offers responsive workspace navigation and persistent preferences',()=>{
   assert.match(html,/id="settingsModal"/);
   assert.match(editor,/PREFERENCES_KEY/);
   assert.match(editor,/data-workspace-view/);
+  assert.match(css,/@media\(max-width:1050px\)/);
 });
 
 test('exposes stable preferences and the v0.7.5 panel controls',()=>{
