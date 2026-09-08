@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.7.6 — 2026-09-07
+
+- Sustitución de los 12 selectores nativos por menús propios persistentes, accesibles por clic y teclado.
+- Siete diseños de página: una viñeta, dos horizontales, dos verticales, cinematográfico, tres horizontales, cuatro y seis viñetas.
+- Cinco fondos integrados nuevos: aula, azotea, bosque, estación y habitación.
+- Cinco efectos manga nuevos: rayado cruzado, lluvia dramática, tensión oscura, destellos shōjo y ondas de choque.
+- Botones visibles para girar elementos −15°, restablecer a 0° y girar +15°, además de un tirador `↻` sobre la selección.
+- Rango de rotación ampliado a −180°–180° y corrección de controles ocultos duplicados en Exportar.
+- Treinta y seis pruebas automatizadas y validación interactiva de los menús personalizados.
+
 ## 0.7.5 — 2026-09-07
 
 - Selección directa de viñetas en el lienzo, con indicador visual y controles sincronizados.

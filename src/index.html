@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#141414" />
   <title>Manga Studio</title>
   <meta name="description" content="Prototipo de editor visual para crear páginas de manga." />
-  <link rel="stylesheet" href="styles.css?v=0.7.5" />
+  <link rel="stylesheet" href="styles.css?v=0.7.6" />
 </head>
 <body data-theme="dark">
   <a class="skip-link" href="#editorMain">Saltar al editor</a>
@@ -14,7 +14,7 @@
     <div class="brand" aria-label="Manga Studio">
       <span class="brand-mark">M</span>
       <span>MANGA <b>STUDIO</b></span>
-        <span class="badge">PROTOTIPO v0.7.5</span>
+        <span class="badge">PROTOTIPO v0.7.6</span>
     </div>
     <div class="history-tools" aria-label="Historial">
       <button class="icon-btn" id="undoBtn" title="Deshacer" aria-label="Deshacer">↶</button>
@@ -74,6 +74,20 @@
           <button class="asset-tile speed-preview" data-bg="speed">Líneas</button>
           <button class="asset-tile dots-preview" data-bg="dots">Trama</button>
           <button class="asset-tile burst-preview" data-bg="burst">Impacto</button>
+          <button class="asset-tile crosshatch-preview" data-bg="crosshatch">Rayado</button>
+          <button class="asset-tile rain-preview" data-bg="rain">Lluvia</button>
+          <button class="asset-tile vignette-preview" data-bg="vignette">Tensión</button>
+          <button class="asset-tile sparkle-preview" data-bg="sparkle">Destellos</button>
+          <button class="asset-tile shock-preview" data-bg="shock">Ondas</button>
+        </div>
+        <div class="section-heading background-heading"><span>Fondos integrados</span></div>
+        <div class="asset-grid background-library">
+          <button class="asset-tile city-background" data-background="city">Ciudad</button>
+          <button class="asset-tile classroom-background" data-background="classroom">Aula</button>
+          <button class="asset-tile rooftop-background" data-background="rooftop">Azotea</button>
+          <button class="asset-tile forest-background" data-background="forest">Bosque</button>
+          <button class="asset-tile station-background" data-background="station">Estación</button>
+          <button class="asset-tile room-background" data-background="room">Habitación</button>
         </div>
       </section>
 
@@ -151,7 +165,8 @@
       <div class="control-group" id="transformControls">
         <label>Transformar</label>
         <div class="range-row"><label for="scaleRange">Tamaño</label><input id="scaleRange" type="range" min="30" max="180" value="100" /></div>
-        <div class="range-row"><label for="rotateRange">Rotación</label><input id="rotateRange" type="range" min="-30" max="30" value="0" /></div>
+        <div class="range-row"><label for="rotateRange">Rotación</label><input id="rotateRange" type="range" min="-180" max="180" value="0" /></div>
+        <div class="rotation-actions" aria-label="Rotación rápida"><button id="rotateLeft" title="Girar 15 grados a la izquierda">↶ −15°</button><button id="rotateReset" title="Restablecer rotación">◇ 0°</button><button id="rotateRight" title="Girar 15 grados a la derecha">↷ +15°</button></div>
         <button class="button full" id="flipBtn">Voltear horizontal</button>
         <label class="check-row clip-control"><span>Recortar al borde de la viñeta</span><input id="clipToPanel" type="checkbox" checked></label>
         <div class="align-tools"><button id="alignHorizontal" title="Alinear centros horizontalmente">↔ Alinear</button><button id="alignVertical" title="Alinear centros verticalmente">↕ Alinear</button></div>
@@ -166,9 +181,13 @@
       <div class="control-group page-controls">
         <label>Diseño de viñetas</label>
         <div class="layout-picker" id="layoutPicker">
+          <button class="layout-option one" data-layout="one" aria-label="Una viñeta"><i></i></button>
+          <button class="layout-option two" data-layout="two" aria-label="Dos viñetas horizontales"><i></i><i></i></button>
+          <button class="layout-option vertical" data-layout="vertical" aria-label="Dos viñetas verticales"><i></i><i></i></button>
           <button class="layout-option active" data-layout="cinematic" aria-label="Diseño cinematográfico"><i></i><i></i><i></i></button>
-          <button class="layout-option two" data-layout="two" aria-label="Dos viñetas"><i></i><i></i></button>
+          <button class="layout-option three" data-layout="three" aria-label="Tres viñetas horizontales"><i></i><i></i><i></i></button>
           <button class="layout-option four" data-layout="four" aria-label="Cuatro viñetas"><i></i><i></i><i></i><i></i></button>
+          <button class="layout-option six" data-layout="six" aria-label="Seis viñetas"><i></i><i></i><i></i><i></i><i></i><i></i></button>
         </div>
         <div class="panel-actions"><button id="mergePanels">− Unir</button><button id="splitPanels">＋ Dividir</button></div>
         <div class="range-row"><label for="panelGutter">Canal</label><input id="panelGutter" type="range" min="8" max="42" value="20"></div>
@@ -179,11 +198,16 @@
         <label for="backgroundSelect">Fondo de la viñeta</label>
         <select id="backgroundSelect">
           <option value="city">Ciudad nocturna</option>
+          <option value="classroom">Aula</option>
+          <option value="rooftop">Azotea</option>
+          <option value="forest">Bosque</option>
+          <option value="station">Estación</option>
+          <option value="room">Habitación</option>
           <option value="blank">Blanco limpio</option>
           <option value="imported">Fondo importado</option>
         </select>
         <label for="panelEffectSelect">Efecto de la viñeta</label>
-        <select id="panelEffectSelect"><option value="none">Sin efecto</option><option value="speed">Líneas de velocidad</option><option value="dots">Trama de puntos</option><option value="burst">Impacto radial</option></select>
+        <select id="panelEffectSelect"><option value="none">Sin efecto</option><option value="speed">Líneas de velocidad</option><option value="dots">Trama de puntos</option><option value="burst">Impacto radial</option><option value="crosshatch">Rayado cruzado</option><option value="rain">Lluvia dramática</option><option value="vignette">Tensión oscura</option><option value="sparkle">Destellos shōjo</option><option value="shock">Ondas de choque</option></select>
         <div class="range-row"><label for="backgroundOpacity">Opacidad</label><input id="backgroundOpacity" type="range" min="20" max="100" value="100"></div>
         <div class="range-row"><label for="backgroundBlur">Desenfoque</label><input id="backgroundBlur" type="range" min="0" max="12" value="0"></div>
         <div class="range-row"><label for="backgroundScale">Escala</label><input id="backgroundScale" type="range" min="50" max="220" value="100"></div>
@@ -346,6 +370,6 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
   <div class="sr-only" id="liveRegion" role="status" aria-live="polite" aria-atomic="true"></div>
-  <script src="app.js?v=0.7.5"></script>
+  <script src="app.js?v=0.7.6"></script>
 </body>
 </html>

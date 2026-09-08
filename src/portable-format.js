@@ -20,7 +20,7 @@ function dataUrlToBytes(dataUrl){const comma=dataUrl.indexOf(',');if(comma<0)thr
 function bytesToDataUrl(bytes,mime){let binary='';for(let index=0;index<bytes.length;index+=0x8000)binary+=String.fromCharCode(...bytes.subarray(index,index+0x8000));return`data:${mime};base64,${btoa(binary)}`}
 function extension(mime,kind){if(kind==='vrm')return'vrm';return{'image/png':'png','image/jpeg':'jpg','image/webp':'webp','image/svg+xml':'svg'}[mime]||'bin'}
 
-export async function createPortableProject(project,appVersion='0.7.5'){
+export async function createPortableProject(project,appVersion='0.7.6'){
   const portable=structuredClone(project),entries={},checksums={};portable.assets=[];
   for(const asset of project.assets||[]){const stored={...asset},path=`assets/${asset.id}.${extension(asset.mime,asset.kind)}`;let bytes;if(asset.kind==='image')bytes=dataUrlToBytes(asset.dataUrl);else if(asset.kind==='vrm')bytes=new Uint8Array(await asset.blob.arrayBuffer());else continue;delete stored.dataUrl;delete stored.blob;stored.file=path;stored.size=bytes.length;portable.assets.push(stored);entries[path]=bytes;checksums[path]=await sha256(bytes)}
   const projectBytes=encoder.encode(JSON.stringify(portable));entries['project.json']=projectBytes;checksums['project.json']=await sha256(projectBytes);

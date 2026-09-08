@@ -1,7 +1,7 @@
 # Roadmap de Manga Studio hacia 1.0
 
 Última actualización: 7 de septiembre de 2026  
-Estado actual: **Prototipo v0.7.5**
+Estado actual: **Prototipo v0.7.6**
 
 ## Visión de 1.0
 
@@ -184,6 +184,10 @@ Implementado en v0.7.0: paneles plegables en escritorio y navegación inferior p
 
 Antes de iniciar la fase 6 se corrigió el modelo de interacción de las viñetas. Cada panel se selecciona directamente y conserva de forma independiente fondo, efecto, opacidad, desenfoque, monocromo y transformación. Cada personaje, imagen o globo decide si se recorta al borde o puede atravesarlo. El avatar 3D dispone de giro propio sobre el eje vertical, manteniendo objetivos IK y lados anatómicos coherentes. Los selectores de preferencias se sustituyeron por controles segmentados para evitar menús que desaparecían en el navegador integrado. El esquema documental v4 migra automáticamente los proyectos anteriores y la suite alcanza 33 pruebas.
 
+## Corrección creativa y de controles — v0.7.6 — completada
+
+Los 12 selectores nativos fueron sustituidos por un componente propio con menú persistente, interacción por clic, flechas, Inicio/Fin y estados accesibles. Se añadieron cuatro diseños respecto a la oferta inicial, cinco fondos integrados y cinco efectos manga. La rotación 2D ahora tiene botones visibles de ±15°, restablecimiento y un tirador identificado sobre la selección, con rango completo de ±180°. La matriz automatizada alcanza 36 pruebas.
+
 ## Fase 6 — Privacidad y confiabilidad (v0.8.0)
 
 **Objetivo:** preparar la operación real sin comprometer las obras.
@@ -264,4 +268,4 @@ Fuera de 1.0: colaboración simultánea, marketplace, generación automática co
 
 ## Próxima iteración recomendada
 
-Iniciar la fase 6 (v0.8.0) con una revisión de amenazas, política local-first, recuperación frente a almacenamiento lleno y endurecimiento de la importación. Mantener como matriz de regresión los flujos de viñetas independientes, recorte opcional y giro del avatar incorporados en v0.7.5.
+Iniciar la fase 6 (v0.8.0) con una revisión de amenazas, política local-first, recuperación frente a almacenamiento lleno y endurecimiento de la importación. Mantener como matriz de regresión los selectores propios, diseños expandidos, viñetas independientes, recorte opcional y controles de rotación consolidados en v0.7.6.

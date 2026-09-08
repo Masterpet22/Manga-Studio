@@ -1,7 +1,7 @@
 export const DOCUMENT_SCHEMA_VERSION=4;
 export const uid=(prefix='id')=>`${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,8)}`;
 export const deepClone=value=>structuredClone(value);
-export const panelCountForLayout=layout=>layout==='one'?1:layout==='two'?2:layout==='four'?4:3;
+export const panelCountForLayout=layout=>layout==='one'?1:['two','vertical'].includes(layout)?2:['cinematic','three'].includes(layout)?3:layout==='four'?4:layout==='six'?6:3;
 
 export function createPanelContent(index=0,legacy={}){
   const legacyVisual=legacy.background||'city',effect=['speed','dots','burst'].includes(legacyVisual)?legacyVisual:'none';
